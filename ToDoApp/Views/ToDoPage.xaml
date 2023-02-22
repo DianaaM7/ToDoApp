@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ToDoApp.Models"
+             xmlns:vm="clr-namespace:ToDoApp.ViewModels"
+             x:DataType="vm:ToDoPageViewModel"
+             x:Class="ToDoApp.Views.ToDoPage"
+             BackgroundImageSource="blue.jpeg">
+
+    <Grid RowDefinitions="auto, *"
+          Margin="10,10">
+        <Border StrokeShape="RoundRectangle 5">
+            <Grid ColumnDefinitions="*, auto"
+                  Margin="5,5">
+                <Entry Grid.Column="0"
+                       x:Name="textEntry"
+                       Placeholder="Add something to do"
+                       Text="{Binding Task}"
+                       PlaceholderColor="Gray"
+                       ClearButtonVisibility="WhileEditing"
+                       TextColor="Black" />
+                <Button Grid.Column="1"
+                        x:Name="Save"
+                        Text="Save"
+                        Command="{Binding AddToDoCommand}"
+                        Opacity="0.8"
+                        TextColor="White"
+                        FontSize="16"
+                        />
+            </Grid>
+        </Border>
+
+        <CollectionView Margin="0,20"
+                        ItemsSource="{Binding ToDos}"
+                        Grid.Row="1">
+            
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="1"
+                                 VerticalItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:ToDoListModel">
+                    <Border StrokeShape="RoundRectangle 5">
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem Text="Delete"
+                                               BackgroundColor="Red"
+                                               IconImageSource="delete.png"
+                                               Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:ToDoPageViewModel}}, Path=RemoveToDoCommand}"
+                                               CommandParameter="{Binding .}">
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <Border StrokeShape="RoundRectangle 3">
+                                <Grid ColumnDefinitions="auto, *">
+                                    <CheckBox Grid.Column="0" />
+                                    <Label Grid.Column="1"
+                                           VerticalTextAlignment="Center"
+                                           Text="{Binding Task}"
+                                           IsEnabled="True"
+                                           Padding="5" />
+                                </Grid>
+                            </Border>
+                        </SwipeView>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>

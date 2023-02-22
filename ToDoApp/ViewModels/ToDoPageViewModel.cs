@@ -13,6 +13,9 @@ namespace ToDoApp.ViewModels
         [ObservableProperty]
         private string task;
 
+        [ObservableProperty]
+        private bool isDone;
+
         public ToDoPageViewModel()
         {
             Title = "ToDo";

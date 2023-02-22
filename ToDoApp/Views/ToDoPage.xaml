@@ -56,12 +56,28 @@
                             </SwipeView.RightItems>
                             <Border StrokeShape="RoundRectangle 3">
                                 <Grid ColumnDefinitions="auto, *">
-                                    <CheckBox Grid.Column="0" />
+                                    <CheckBox Grid.Column="0"
+                                              IsChecked="{Binding IsDone}"/>
                                     <Label Grid.Column="1"
                                            VerticalTextAlignment="Center"
                                            Text="{Binding Task}"
                                            IsEnabled="True"
-                                           Padding="5" />
+                                           Padding="5">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}"
+                                                         Value="false">
+                                                <Setter Property="TextDecorations"
+                                                        Value="None" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label"
+                                                         Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}"
+                                                         Value="true">
+                                                <Setter Property="TextDecorations"
+                                                        Value="Strikethrough" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
                                 </Grid>
                             </Border>
                         </SwipeView>

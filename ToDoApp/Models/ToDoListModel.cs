@@ -15,4 +15,6 @@ public class ToDoListModel
             task = value;
         }
     }
+
+    public bool IsDone { get; set; }
 }

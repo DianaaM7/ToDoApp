@@ -57,6 +57,7 @@
                             <Border StrokeShape="RoundRectangle 3">
                                 <Grid ColumnDefinitions="auto, *">
                                     <CheckBox Grid.Column="0"
+                                              x:Name="checkBox"
                                               IsChecked="{Binding IsDone}"/>
                                     <Label Grid.Column="1"
                                            VerticalTextAlignment="Center"
